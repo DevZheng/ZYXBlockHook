@@ -13,6 +13,12 @@
 		2B4566A821A3FAA1008EEF62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B4566A721A3FAA1008EEF62 /* Assets.xcassets */; };
 		2B4566AB21A3FAA1008EEF62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B4566A921A3FAA1008EEF62 /* LaunchScreen.storyboard */; };
 		2B4566AE21A3FAA1008EEF62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4566AD21A3FAA1008EEF62 /* main.m */; };
+		2B4566CC21A3FC2C008EEF62 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4566C621A3FC2B008EEF62 /* Aspects.m */; };
+		2B4566CD21A3FC2C008EEF62 /* NSObject+zyx_runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4566C821A3FC2B008EEF62 /* NSObject+zyx_runtime.m */; };
+		2B4566CE21A3FC2C008EEF62 /* ZYXBlockHook.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B4566CA21A3FC2C008EEF62 /* ZYXBlockHook.m */; };
+		2B4566D021A3FC56008EEF62 /* include in Resources */ = {isa = PBXBuildFile; fileRef = 2B4566CF21A3FC56008EEF62 /* include */; };
+		2B4566D221A3FC77008EEF62 /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4566D121A3FC77008EEF62 /* libffi.a */; };
+		2B4566D821A7EEE9008EEF62 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 2B4566D621A7EEE9008EEF62 /* fishhook.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,16 @@
 		2B4566AA21A3FAA1008EEF62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B4566AC21A3FAA1008EEF62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B4566AD21A3FAA1008EEF62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B4566C621A3FC2B008EEF62 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
+		2B4566C721A3FC2B008EEF62 /* ZYXBlockHook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYXBlockHook.h; sourceTree = "<group>"; };
+		2B4566C821A3FC2B008EEF62 /* NSObject+zyx_runtime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+zyx_runtime.m"; sourceTree = "<group>"; };
+		2B4566C921A3FC2B008EEF62 /* NSObject+zyx_runtime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+zyx_runtime.h"; sourceTree = "<group>"; };
+		2B4566CA21A3FC2C008EEF62 /* ZYXBlockHook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYXBlockHook.m; sourceTree = "<group>"; };
+		2B4566CB21A3FC2C008EEF62 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		2B4566CF21A3FC56008EEF62 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
+		2B4566D121A3FC77008EEF62 /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libffi.a; path = ZYXBlockHook/Source/libffi.a; sourceTree = "<group>"; };
+		2B4566D621A7EEE9008EEF62 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		2B4566D721A7EEE9008EEF62 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B4566D221A3FC77008EEF62 /* libffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +61,7 @@
 			children = (
 				2B45669D21A3FAA0008EEF62 /* ZYXBlockHook */,
 				2B45669C21A3FAA0008EEF62 /* Products */,
+				2B4566B921A3FB79008EEF62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +76,7 @@
 		2B45669D21A3FAA0008EEF62 /* ZYXBlockHook */ = {
 			isa = PBXGroup;
 			children = (
+				2B4566BC21A3FBEA008EEF62 /* Source */,
 				2B45669E21A3FAA0008EEF62 /* AppDelegate.h */,
 				2B45669F21A3FAA0008EEF62 /* AppDelegate.m */,
 				2B4566A121A3FAA0008EEF62 /* ViewController.h */,
@@ -69,6 +88,30 @@
 				2B4566AD21A3FAA1008EEF62 /* main.m */,
 			);
 			path = ZYXBlockHook;
+			sourceTree = "<group>";
+		};
+		2B4566B921A3FB79008EEF62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B4566D121A3FC77008EEF62 /* libffi.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B4566BC21A3FBEA008EEF62 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				2B4566CF21A3FC56008EEF62 /* include */,
+				2B4566CB21A3FC2C008EEF62 /* Aspects.h */,
+				2B4566C621A3FC2B008EEF62 /* Aspects.m */,
+				2B4566C921A3FC2B008EEF62 /* NSObject+zyx_runtime.h */,
+				2B4566C821A3FC2B008EEF62 /* NSObject+zyx_runtime.m */,
+				2B4566C721A3FC2B008EEF62 /* ZYXBlockHook.h */,
+				2B4566CA21A3FC2C008EEF62 /* ZYXBlockHook.m */,
+				2B4566D721A7EEE9008EEF62 /* fishhook.h */,
+				2B4566D621A7EEE9008EEF62 /* fishhook.c */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +174,7 @@
 				2B4566AB21A3FAA1008EEF62 /* LaunchScreen.storyboard in Resources */,
 				2B4566A821A3FAA1008EEF62 /* Assets.xcassets in Resources */,
 				2B4566A621A3FAA0008EEF62 /* Main.storyboard in Resources */,
+				2B4566D021A3FC56008EEF62 /* include in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,8 +186,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B4566A321A3FAA0008EEF62 /* ViewController.m in Sources */,
+				2B4566D821A7EEE9008EEF62 /* fishhook.c in Sources */,
 				2B4566AE21A3FAA1008EEF62 /* main.m in Sources */,
 				2B4566A021A3FAA0008EEF62 /* AppDelegate.m in Sources */,
+				2B4566CD21A3FC2C008EEF62 /* NSObject+zyx_runtime.m in Sources */,
+				2B4566CE21A3FC2C008EEF62 /* ZYXBlockHook.m in Sources */,
+				2B4566CC21A3FC2C008EEF62 /* Aspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,10 +334,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5R78HF4472;
+				HEADER_SEARCH_PATHS = ./ZYXBlockHook/Source/include/ffi;
 				INFOPLIST_FILE = ZYXBlockHook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZYXBlockHook/src/Framework",
+					"$(PROJECT_DIR)/ZYXBlockHook/Source",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.baidu.zhengyuxin.ZYXBlockHook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,10 +358,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5R78HF4472;
+				HEADER_SEARCH_PATHS = ./ZYXBlockHook/Source/include/ffi;
 				INFOPLIST_FILE = ZYXBlockHook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ZYXBlockHook/src/Framework",
+					"$(PROJECT_DIR)/ZYXBlockHook/Source",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.baidu.zhengyuxin.ZYXBlockHook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
