@@ -16,9 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+typedef NS_ENUM(NSUInteger, ZYXBlockHookMode) {
+    ZYXBlockHookModeBefore,
+    ZYXBlockHookModeInstead,
+    ZYXBlockHookModeAfter,
+};
+
 @interface NSObject (ZyxBlockHook)
 
-- (ZYXHookBlockToken *)zyx_hookblockUseBlock:(id)block;
+- (ZYXHookBlockToken *)zyx_hookblockWithMode:(ZYXBlockHookMode)mode
+                                   hookBlock:(id)block;
+
+- (ZYXHookBlockToken *)zyx_hookblockWithMode:(ZYXBlockHookMode)mode
+                                   printArgs:(BOOL)printArgs
+                                   hookBlock:(id)block;
 
 - (void)zyx_removeHookBlock;
 

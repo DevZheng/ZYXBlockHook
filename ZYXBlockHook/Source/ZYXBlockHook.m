@@ -45,24 +45,27 @@ enum {
     void *_originInvoke;
 }
 
-@property (nonatomic, weak) id originBlock;
 
-
+//
 @property (nonatomic, assign) NSInteger numberOfArgs;
 
+//原始的 block
+@property (nonatomic, weak) id originBlock;
 
+//hook 的 block
 @property (nonatomic, strong) id hookBlock;
 
-/*
- 返回值
- */
+//hook 的 模式
+@property (nonatomic, assign) ZYXBlockHookMode mode;
+
+//是否打印参数列表
+@property (nonatomic, assign) BOOL printArgs;
+
+//返回值
 @property (nonatomic) void *retValue;
 
-/*
- 参数列表
- */
+//参数列表
 @property (nonatomic) void **args;
-
 
 @end
 
@@ -135,11 +138,12 @@ enum {
         return;
     }
     
-    if (hookBlockSignature.numberOfArguments > 1) {
+    if (hookBlockSignature.numberOfArguments > 1) { // token 在第二次（index = 1）参数位置
         [inv setArgument:(void *)&self atIndex:1];
     }
     
     void *argBuf = NULL;
+    
     for (NSUInteger idx = 2; idx < hookBlockSignature.numberOfArguments; idx++) {
         const char *type = [originBlockSignature getArgumentTypeAtIndex:idx - 1];
         NSUInteger sizep;
@@ -242,9 +246,26 @@ void _HookblockFFIClosureFunc(ffi_cif *cif, void *ret, void **args, void *userda
     token.args = args;
     token.retValue = ret;
     
-    [token printAllArgs];
-
-    [token invokeHookBlock];
+    if (token.printArgs) {
+        [token printAllArgs];
+    }
+    
+    switch (token.mode) {
+        case ZYXBlockHookModeBefore: {
+            [token invokeHookBlock];
+            [token invokeOriginBlock];
+            break;
+        }
+        case ZYXBlockHookModeInstead: {
+            [token invokeHookBlock];
+            break;
+        }
+        case ZYXBlockHookModeAfter: {
+            [token invokeOriginBlock];
+            [token invokeHookBlock];
+            break;
+        }
+    }
 }
 
 #pragma mark -
@@ -391,13 +412,18 @@ static ffi_type ** _ffiTypesForSignature(const char *sig, int *count) {
 
 #define kAssociatedKey @"kAssociatedKey"
 
-- (ZYXHookBlockToken *)zyx_hookblockUseBlock:(id)block {
+- (ZYXHookBlockToken *)zyx_hookblockWithMode:(ZYXBlockHookMode)mode hookBlock:(id)block {
+    return [self zyx_hookblockWithMode:mode printArgs:NO hookBlock:block];
+}
+
+- (ZYXHookBlockToken *)zyx_hookblockWithMode:(ZYXBlockHookMode)mode printArgs:(BOOL)printArgs hookBlock:(id)block {
     ZYXHookBlockToken *token = [[ZYXHookBlockToken alloc] init];
     token.originBlock = self;
     token.hookBlock = block;
+    token.printArgs = printArgs;
+    token.mode = mode;
     
     [token hook];
-
     return token;
 }
 
