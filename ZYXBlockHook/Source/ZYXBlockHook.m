@@ -169,6 +169,7 @@ enum {
     NSInteger argCount = originBlockSignature.numberOfArguments;
     
     if (argCount <= 1) {
+        NSLog(@"origin block has no args ---");
         return;
     }
     

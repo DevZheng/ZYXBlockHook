@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "NSObject+zyx_runtime.h"
 #import "ZYXBlockHook.h"
+#import "fishhook.h"
 
 typedef void(^ArgumentBlk)(int);
 
@@ -23,7 +24,7 @@ typedef void(^TestBlk)(ArgumentBlk a, int i, long l, id obj, Class cls);
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self testPrintArgumentsAndOriginCall];
+    [self testPrintArgumentsForEveryBlockAfterCall];
 }
 
 - (void)testPrintHelloWorld {
@@ -60,8 +61,44 @@ typedef void(^TestBlk)(ArgumentBlk a, int i, long l, id obj, Class cls);
     [token removeHookBlock];
 }
 
-- (void)testPrintArgumentsForEveryBlockAfterCall {
+
+typedef void(^Block)(ZYXHookBlockToken *token);
+static id block;
+static NSMutableArray *containArray;
+
+id (*origin_objc_retainBlock)(id blk);
+
+id zyx_objc_retainBlock(id blk) {
+    if (blk != block) {
+        ZYXHookBlockToken *token = [blk zyx_hookblockWithMode:ZYXBlockHookModeAfter
+                                                    printArgs:YES
+                                                    hookBlock:block];
+        [containArray addObject:token];
+    }
     
+    return origin_objc_retainBlock(blk);
+}
+
+- (void)testPrintArgumentsForEveryBlockAfterCall {
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        containArray = [NSMutableArray new];
+        block = ^(ZYXHookBlockToken *token){
+            
+        };
+    });
+    
+    struct rebinding objc_retainBlock_rebinding = {"objc_retainBlock", zyx_objc_retainBlock, &origin_objc_retainBlock};
+    int result = rebind_symbols((struct rebinding[1]){objc_retainBlock_rebinding}, 1);
+    
+    typedef void(^Block)(void);
+    
+    Block blk = ^(void){
+        NSLog(@"Origin call");
+    };
+    
+    blk();
     
 }
 
